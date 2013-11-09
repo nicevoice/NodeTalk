@@ -1,15 +1,12 @@
-lib-cov
-*.seed
-*.log
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
+# Linux
+*~
 
-pids
-logs
-results
+# Windows
+Thumbs.db
 
+# PhpStorm
+/.idea/*
+
+# Node
 npm-debug.log
 node_modules
