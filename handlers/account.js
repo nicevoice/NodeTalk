@@ -20,7 +20,7 @@ exports.signup = function(req, res){
   }
 
   function sha256(data) {
-    return require('crypto').createHash('md5').update(data).digest('hex');
+    return require('crypto').createHash('sha256').update(data).digest('hex');
   }
 
   function timestamp() {
@@ -44,13 +44,12 @@ exports.signup = function(req, res){
         "passwd": sha256(sha256(username) + sha256(req.body['passwd'])),
         "email": req.body['email'],
         "created_at": timestamp()
-      }, {w: 0});
+      }, {w: 1});
+      res.redirect('/');
     }
     else
     {
       error('handler.signup.usernameExist');
     }
   });
-
-  res.redirect('/');
 };
