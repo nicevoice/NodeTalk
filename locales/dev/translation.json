@@ -1,0 +1,21 @@
+{
+    "app": {
+      "name": "NodeTalk"
+    },
+    "word": {
+      "topic": "话题",
+      "node": "节点",
+      "user": "用户",
+      "signup": "注册",
+      "login": "登录",
+      "username": "用户名",
+      "email": "邮箱",
+      "passwd": "密码"
+    },
+    "view": {
+      "signup": {
+        "passwd2": "重复",
+        "alreadySignup": "已有帐号？"
+      }
+    }
+}

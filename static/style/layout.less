@@ -3,7 +3,7 @@ body {
   font-family: "WenQuanYi Micro Hei", "WenQuanYi Zen Hei", "Microsoft YaHei", arial, sans-serif;
   font-size: 16px;
 
-  header {
+  >header {
     background-color: #8BC84B;
 
     nav.navbar {
@@ -23,4 +23,29 @@ body {
       background-color: #73a53e;
     }
   }
+
+  #content {
+    header {
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+      font-size: 30px;
+    }
+
+    #sidebar {
+      header{
+        font-size: 22px;
+      }
+      .row>a {
+        margin: 0 10px;
+      }
+    }
+  }
+
+  .form-group {
+    .col-sm-offset-3 button {
+      margin: 6px 12px;
+    }
+  }
 }
+

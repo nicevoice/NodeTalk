@@ -1,6 +1,7 @@
 doctype 5
 html
   head
+    meta(charset=utf-8)
     title= title
     link(rel='stylesheet', href='http://cdn.staticfile.org/twitter-bootstrap/3.0.0-rc2/css/bootstrap.min.css')
     link(rel='stylesheet', href='/style/layout.css')
@@ -18,24 +19,24 @@ html
           #bs-example-navbar-collapse-1.collapse.navbar-collapse
             ul.nav.navbar-nav
               li.active
-                a(href='#') 话题
+                a(href='#')= t('word.topic')
               li
-                a(href='#') 节点
+                a(href='#')= t('word.node')
               li
-                a(href='#') 用户
+                a(href='#')= t('word.user')
             form.navbar-form.navbar-left(role='search')
               .form-group
                 input.form-control(type='text', placeholder='Search')
             ul.nav.navbar-nav.navbar-right
               li
-                a(href='#') 注册
+                a(href='/account/signup')= t('word.signup')
               li
-                a(href='#') 登录
+                a(href='#')= t('word.login')
     #content.container
       .row
         .col-md-9
           block main
-        .col-md-3
+        #sidebar.col-md-3
           block sidebar
     #footer
       script(src='http://cdn.staticfile.org/jquery/2.0.3/jquery.min.js')
