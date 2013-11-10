@@ -8,5 +8,8 @@ Thumbs.db
 /.idea/*
 
 # Node
-npm-debug.log
 node_modules
+
+# Compiled File
+*.css
+*.html
