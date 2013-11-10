@@ -1,7 +1,11 @@
 exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+  res.render('index');
 };
 
 exports.signup = function(req, res){
-  res.render('signup', {title: req.t("word.signup")});
+  res.render('signup');
+};
+
+exports.login = function(req, res){
+  res.render('login');
 };

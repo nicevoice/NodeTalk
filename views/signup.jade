@@ -1,5 +1,8 @@
 extends layout
 
+prepend head
+  title #{t("word.signup")} | #{t('app.name')}
+
 block main
   header= t('word.signup')
   form.form-horizontal(method='post', role='form')

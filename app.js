@@ -37,6 +37,7 @@ if ('development' == app.get('env')) {
 
   app.get('/', view.index);
   app.get('/account/signup/', view.signup);
+  app.get('/account/login/', view.login);
   app.post('/account/signup/', account.signup)
 })();
 

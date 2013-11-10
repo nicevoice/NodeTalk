@@ -2,9 +2,9 @@ doctype 5
 html
   head
     meta(charset='utf-8')
-    title #{title} | #{t('app.name')}
-    link(rel='stylesheet', href='http://cdn.staticfile.org/twitter-bootstrap/3.0.0-rc2/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/style/layout.css')
+    block head
+      link(rel='stylesheet', href='http://cdn.staticfile.org/twitter-bootstrap/3.0.0-rc2/css/bootstrap.min.css')
+      link(rel='stylesheet', href='/style/layout.css')
   body
     header.navbar-fixed-top
       .container
@@ -18,12 +18,13 @@ html
             a.navbar-brand(href='/')= t('app.name')
           #bs-example-navbar-collapse-1.collapse.navbar-collapse
             ul.nav.navbar-nav
-              li.active
-                a(href='#')= t('word.topic')
-              li
-                a(href='#')= t('word.node')
-              li
-                a(href='#')= t('word.user')
+              block topnav
+                li
+                  a(href='#')= t('word.topic')
+                li
+                  a(href='#')= t('word.node')
+                li
+                  a(href='#')= t('word.user')
             form.navbar-form.navbar-left(role='search')
               .form-group
                 input.form-control(type='text', placeholder='Search')
@@ -31,7 +32,7 @@ html
               li
                 a(href='/account/signup/')= t('word.signup')
               li
-                a(href='#')= t('word.login')
+                a(href='/account/login/')= t('word.login')
 
     #content.container
       .row
