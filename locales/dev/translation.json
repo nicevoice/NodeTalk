@@ -10,12 +10,21 @@
       "login": "登录",
       "username": "用户名",
       "email": "邮箱",
-      "passwd": "密码"
+      "passwd": "密码",
+      "error": "错误"
     },
     "view": {
       "signup": {
         "passwd2": "重复",
         "alreadySignup": "已有帐号？"
+      }
+    },
+    "handler": {
+      "signup": {
+        "passwdNotEqual": "两次输入的密码不一致或密码为空",
+        "invalidUsername": "用户名仅由字母，数字，下划线，连字符，点构成，第一个字符须为字母",
+        "invalidEmail": "请输入正确的邮箱地址",
+        "usernameExist": "该用户名已存在"
       }
     }
 }

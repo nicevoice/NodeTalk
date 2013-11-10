@@ -32,12 +32,20 @@ html
                 a(href='/account/signup/')= t('word.signup')
               li
                 a(href='#')= t('word.login')
+
     #content.container
       .row
         .col-md-9
+          if errorMsg
+            .row
+              .alert.alert-danger.alert-dismissable
+                button.close(type='button', data-dismiss='alert', aria-hidden='true') ×
+                strong= t('word.error')
+                p= errorMsg
           block main
         #sidebar.col-md-3
           block sidebar
+
     #footer
       script(src='http://cdn.staticfile.org/jquery/2.0.3/jquery.min.js')
       script(src='http://cdn.staticfile.org/twitter-bootstrap/3.0.0-rc2/js/bootstrap.min.js')

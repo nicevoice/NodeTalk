@@ -8,7 +8,6 @@ var http = require('http');
 var path = require('path');
 var i18next = require('i18next');
 
-
 var app = express();
 
 i18next.init();
@@ -31,14 +30,18 @@ if ('development' == app.get('env')) {
 }
 
 (function() {
-  var view = require('./routes/view');
-  var account = require('./routes/account');
+  var view = require('./handlers/view');
+  var account = require('./handlers/account');
+
+  require("./db");
 
   app.get('/', view.index);
   app.get('/account/signup/', view.signup);
-  app.post('/account', account.signup)
+  app.post('/account/signup/', account.signup)
 })();
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+
