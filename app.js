@@ -32,9 +32,11 @@ if ('development' == app.get('env')) {
 
 (function() {
   var view = require('./routes/view');
+  var account = require('./routes/account');
 
   app.get('/', view.index);
   app.get('/account/signup/', view.signup);
+  app.post('/account', account.signup)
 })();
 
 http.createServer(app).listen(app.get('port'), function(){

@@ -3,5 +3,5 @@ exports.index = function(req, res){
 };
 
 exports.signup = function(req, res){
-  res.render('signup', { title: 'Express' });
+  res.render('signup', {title: req.t("word.signup")});
 };

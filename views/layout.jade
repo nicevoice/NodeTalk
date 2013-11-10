@@ -1,8 +1,8 @@
 doctype 5
 html
   head
-    meta(charset=utf-8)
-    title= title
+    meta(charset='utf-8')
+    title #{title} | #{t('app.name')}
     link(rel='stylesheet', href='http://cdn.staticfile.org/twitter-bootstrap/3.0.0-rc2/css/bootstrap.min.css')
     link(rel='stylesheet', href='/style/layout.css')
   body
@@ -29,7 +29,7 @@ html
                 input.form-control(type='text', placeholder='Search')
             ul.nav.navbar-nav.navbar-right
               li
-                a(href='/account/signup')= t('word.signup')
+                a(href='/account/signup/')= t('word.signup')
               li
                 a(href='#')= t('word.login')
     #content.container

@@ -1,14 +1,23 @@
 {
   "name": "NodeTalk",
+  "description": "Just another forum.",
   "version": "0.0.1",
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jybox/NodeTalk"
+  },
+  "contributors": [
+    {"name": "jysperm", "web": "http://jysperm.me/"}
+  ],
   "scripts": {
     "start": "node app.js"
   },
+  "license": "MIT",
   "dependencies": {
     "express": "3.4.4",
     "jade": "*",
     "less": "*",
-    "i18next": "*"
+    "i18next": "*",
+    "mongodb": "*"
   }
 }
