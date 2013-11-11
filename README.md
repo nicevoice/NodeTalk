@@ -11,6 +11,8 @@ A Node-based BBS by NodeJS, use MongoDB and Markdown.
     cd NodeTalk
     npm install
 
+    ./node_modules/.bin/lessc -x static/style/layout.less > static/style/layout.css
+
     node app.js
 
 Then you can visit `http://127.0.0.1:3000`, or setup a proxy on 80:
