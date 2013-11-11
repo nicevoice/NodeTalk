@@ -17,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(i18next.handle);
 app.use(express.methodOverride());
+app.use(express.cookieParser());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'static')));
 

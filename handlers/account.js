@@ -69,10 +69,10 @@ exports.login = function(req, res) {
       auth.createToken(result, function(token) {
         res.cookie('token', token, {expires: new Date(Date.now() + 30 * 24 * 3600000)});
         res.redirect('/');
-      })
+      });
     }
     else {
-      error('handler.login.passwdNotMatch')
+      error('handler.login.passwdNotMatch');
     }
   });
 };
