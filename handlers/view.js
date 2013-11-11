@@ -1,6 +1,10 @@
 var db = require("../db");
 
 var render = function(req, res, name, param) {
+  if(!req.cookies.token) {
+    return res.render(name, param);
+  }
+
   db.accounts.findOne({'tokens.token': req.cookies.token}, function(err, result) {
     if(!err) {
       if(!param)

@@ -32,6 +32,8 @@ html
               if account
                 li
                   a(href='/member/#{account.username}/')= account.username
+                li
+                  a(href='/account/logout/')= t('word.logout')
               else
                 li
                   a(href='/account/signup/')= t('word.signup')

@@ -11,7 +11,8 @@
     "username": "用户名",
     "email": "邮箱",
     "passwd": "密码",
-    "error": "错误"
+    "error": "错误",
+    "logout": "注销"
   },
   "view": {
     "signup": {

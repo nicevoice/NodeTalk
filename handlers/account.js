@@ -76,3 +76,20 @@ exports.login = function(req, res) {
     }
   });
 };
+
+exports.logout = function (req, res) {
+  console.log({
+    $pull: {'tokens': {
+      'token': req.cookies.cookie
+    }}});
+
+  db.accounts.update({'tokens.token': req.cookies.cookie}, {
+    $pull: {'tokens': {
+      'token': req.cookies.cookie
+    }}}, function (err) {
+    if (!err) {
+      res.clearCookie('token');
+      res.redirect('/');
+    }
+  });
+}
