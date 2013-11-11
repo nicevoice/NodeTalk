@@ -8,4 +8,5 @@ MongoClient.connect(config.dbname, {}, function(err, db) {
   }
 
   exports.accounts = db.collection('accounts');
+  exports.nodes = db.collection('nodes');
 });

@@ -1,6 +1,7 @@
 {
   "app": {
-    "name": "NodeTalk"
+    "name": "NodeTalk",
+    "description": "Just another forum."
   },
   "word": {
     "topic": "话题",
@@ -12,7 +13,8 @@
     "email": "邮箱",
     "passwd": "密码",
     "error": "错误",
-    "logout": "注销"
+    "logout": "注销",
+    "createTopic": "创建话题"
   },
   "view": {
     "signup": {

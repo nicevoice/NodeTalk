@@ -26,3 +26,15 @@ exports.signup = function(req, res){
 exports.login = function(req, res){
   render(req, res, 'login');
 };
+
+exports.topic = {
+  create: function(req, res) {
+    db.nodes.find({}, function(err, cursor) {
+      if(!err) {
+        cursor.toArray(function(err, result) {
+          render(req, res, 'createTopic', {nodes: result});
+        });
+      }
+    });
+  }
+};
