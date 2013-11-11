@@ -18,13 +18,12 @@ html
             a.navbar-brand(href='/')= t('app.name')
           #bs-example-navbar-collapse-1.collapse.navbar-collapse
             ul.nav.navbar-nav
-              block topnav
-                li
-                  a(href='#')= t('word.topic')
-                li
-                  a(href='#')= t('word.node')
-                li
-                  a(href='#')= t('word.user')
+              li
+                a(href='/topic/')= t('word.topic')
+              li
+                a(href='/topic/node/')= t('word.node')
+              li
+                a(href='/topic/member/')= t('word.user')
             form.navbar-form.navbar-left(role='search')
               .form-group
                 input.form-control(type='text', placeholder='Search')
@@ -62,3 +61,10 @@ html
     #footer
       script(src='http://cdn.staticfile.org/jquery/2.0.3/jquery.min.js')
       script(src='http://cdn.staticfile.org/twitter-bootstrap/3.0.0-rc2/js/bootstrap.min.js')
+      script
+        $(function() {
+          $('nav a').each(function(index) {
+            if($('nav a')[index].pathname == location.pathname)
+              $($('nav a')[index]).parent().addClass('active')
+          });
+        });
