@@ -28,6 +28,9 @@
       "invalidUsername": "用户名仅由字母，数字，下划线，连字符，点构成，第一个字符须为字母",
       "invalidEmail": "请输入正确的邮箱地址",
       "usernameExist": "该用户名已存在"
+    },
+    "login": {
+      "passwdNotMatch": "用户名与密码不匹配"
     }
   }
 }

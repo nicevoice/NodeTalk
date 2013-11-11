@@ -32,8 +32,9 @@ if ('development' == app.get('env')) {
 
   app.get('/', view.index);
   app.get('/account/signup/', view.signup);
+  app.post('/account/signup/', account.signup);
   app.get('/account/login/', view.login);
-  app.post('/account/signup/', account.signup)
+  app.post('/account/login/', account.login);
 })();
 
 http.createServer(app).listen(app.get('port'), function(){

@@ -2,11 +2,11 @@ var db = require("../db");
 var utils = require('../utils');
 var auth = require('../auth');
 
-exports.signup = function(req, res){
+exports.signup = function(req, res) {
   var username = req.body['username'];
+  var passwd = utils.sha256(utils.sha256(username) + utils.sha256(req.body['passwd']));
 
-  function error(msg)
-  {
+  function error(msg) {
     res.render('signup', {
       'errorMsg': req.t(msg),
       'username': username,
@@ -30,16 +30,15 @@ exports.signup = function(req, res){
   if(!validateEmail(req.body['email']))
     error('handler.signup.invalidEmail');
 
-  db.accounts.findOne({"username": username}, function(err, result) {
-    if(!err && !result)
-    {
+  db.accounts.findOne({'username': username}, function(err, result) {
+    if(!err && !result) {
       db.accounts.insert({
-        "username": username,
-        "passwd": utils.sha256(utils.sha256(username) + utils.sha256(req.body['passwd'])),
-        "email": req.body['email'],
-        "created_at": utils.timestamp()
+        'username': username,
+        'passwd': passwd,
+        'email': req.body['email'],
+        'created_at': utils.timestamp()
       }, function() {
-        db.accounts.findOne({"username": username}, function(err, result) {
+        db.accounts.findOne({'username': username}, function(err, result) {
           auth.createToken(result, function(token) {
             res.cookie('token', token, {expires: new Date(Date.now() + 30 * 24 * 3600000)});
             res.redirect('/');
@@ -47,9 +46,33 @@ exports.signup = function(req, res){
         });
       });
     }
-    else
-    {
+    else {
       error('handler.signup.usernameExist');
+    }
+  });
+};
+
+exports.login = function(req, res) {
+  var username = req.body['username'];
+  var passwd = utils.sha256(utils.sha256(username) + utils.sha256(req.body['passwd']));
+
+  function error(msg) {
+    res.render('login', {
+      'errorMsg': req.t(msg),
+      'username': username,
+      'email': req.body['email']
+    });
+  }
+
+  db.accounts.findOne({'username': username, 'passwd': passwd}, function(err, result) {
+    if(!err && result) {
+      auth.createToken(result, function(token) {
+        res.cookie('token', token, {expires: new Date(Date.now() + 30 * 24 * 3600000)});
+        res.redirect('/');
+      })
+    }
+    else {
+      error('handler.login.passwdNotMatch')
     }
   });
 };
