@@ -1,4 +1,6 @@
 var db = require("../db");
+var utils = require('../utils');
+var auth = require('../auth');
 
 exports.signup = function(req, res){
   var username = req.body['username'];
@@ -19,14 +21,6 @@ exports.signup = function(req, res){
     return re.test(email);
   }
 
-  function sha256(data) {
-    return require('crypto').createHash('sha256').update(data).digest('hex');
-  }
-
-  function timestamp() {
-    return Math.round(Date.now() / 1000);
-  }
-
   if(req.body['passwd'] != req.body['passwd2'] || req.body['passwd'].length == 0)
     error('handler.signup.passwdNotEqual');
 
@@ -36,16 +30,22 @@ exports.signup = function(req, res){
   if(!validateEmail(req.body['email']))
     error('handler.signup.invalidEmail');
 
-  db.users.findOne({"username": username}, function(err, result) {
+  db.accounts.findOne({"username": username}, function(err, result) {
     if(!err && !result)
     {
-      db.users.insert({
+      db.accounts.insert({
         "username": username,
-        "passwd": sha256(sha256(username) + sha256(req.body['passwd'])),
+        "passwd": utils.sha256(utils.sha256(username) + utils.sha256(req.body['passwd'])),
         "email": req.body['email'],
-        "created_at": timestamp()
-      }, {w: 1});
-      res.redirect('/');
+        "created_at": utils.timestamp()
+      }, function() {
+        db.accounts.findOne({"username": username}, function(err, result) {
+          auth.createToken(result, function(token) {
+            res.cookie('token', token, {expires: new Date(Date.now() + 30 * 24 * 3600000)});
+            res.redirect('/');
+          })
+        });
+      });
     }
     else
     {
