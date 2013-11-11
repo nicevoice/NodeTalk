@@ -78,16 +78,11 @@ exports.login = function(req, res) {
 };
 
 exports.logout = function (req, res) {
-  console.log({
+  db.accounts.update({'tokens.token': req.cookies.token}, {
     $pull: {'tokens': {
-      'token': req.cookies.cookie
-    }}});
-
-  db.accounts.update({'tokens.token': req.cookies.cookie}, {
-    $pull: {'tokens': {
-      'token': req.cookies.cookie
-    }}}, function (err) {
-    if (!err) {
+      'token': req.cookies.token
+    }}}, function(err) {
+    if(!err) {
       res.clearCookie('token');
       res.redirect('/');
     }
