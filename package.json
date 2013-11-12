@@ -14,13 +14,14 @@
   },
   "license": "MIT",
   "dependencies": {
-    "express": "3.4.4",
+    "express": "*",
     "jade": "*",
     "less": "*",
     "i18next": "*",
     "mongodb": "*",
     "markdown": "*",
     "async": "*",
-    "vows": "*"
+    "vows": "*",
+    "forever": "*"
   }
 }
