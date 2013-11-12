@@ -1,8 +1,8 @@
 var crypto = require('crypto');
-var auth = require('auth');
+var auth = require('./auth');
 
 exports.sha256 = function(data) {
-  return require('crypto').createHash('sha256').update(data).digest('hex');
+  return crypto.createHash('sha256').update(data).digest('hex');
 };
 
 exports.timestamp = function() {
@@ -13,7 +13,7 @@ exports.render = function(req, res, name, param) {
   auth.authenticate(req, function(err, account) {
     if(!param)
       param = {};
-    param.account = err ? {} : account;
+    param.account = err ? undefined : account;
     res.render(name, param);
   });
 };

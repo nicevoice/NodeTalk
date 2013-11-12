@@ -1,4 +1,5 @@
 var db = require("../db");
+var utils = require('../utils');
 
 exports.index = function(req, res) {
   utils.render(req, res, 'index');

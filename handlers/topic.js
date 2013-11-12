@@ -5,11 +5,16 @@ var markdown = require("markdown").markdown;
 
 exports.create = function(req, res) {
   function error(msg) {
-    utils.render(req, res, 'createTopic', {
-      'errorMsg': req.t(msg),
-      'nodevalue': req.body['node'],
-      'title': req.body['title'],
-      'content': req.body['content']
+    db.nodes.find({}, function(err, cursor) {
+      cursor.toArray(function(err, result) {
+        utils.render(req, res, 'createTopic', {
+          'errorMsg': req.t(msg),
+          'nodevalue': req.body['node'],
+          'title': req.body['title'],
+          'content': req.body['content'],
+          nodes: result
+        });
+      });
     });
   }
 

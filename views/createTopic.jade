@@ -10,7 +10,7 @@ block main
       .col-sm-3
         select#node.form-control(name='node', value=nodevalue)
           for node in nodes
-            option(value=node.title)= node.name
+            option(value=node.name)= node.title
       .col-sm-9
         input#title.form-control(type='text', name='title', required, value=title)
     .form-group.contentarea
