@@ -1,0 +1,14 @@
+extends layout
+
+prepend head
+  title #{t("word.node")} | #{t('app.name')}
+
+block main
+  header= t('word.node')
+  ul.list-group
+    for node in nodes
+      li.list-group-item
+        span.badge 0
+        a(href='/node/#{node.name}')= node.title
+        p= node.description
+

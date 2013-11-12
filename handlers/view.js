@@ -1,40 +1,33 @@
 var db = require("../db");
 
-var render = function(req, res, name, param) {
-  if(!req.cookies.token) {
-    return res.render(name, param);
-  }
-
-  db.accounts.findOne({'tokens.token': req.cookies.token}, function(err, result) {
-    if(!err) {
-      if(!param)
-        param = {};
-      param.account = result;
-      res.render(name, param);
-    }
-  });
-}
-
 exports.index = function(req, res) {
-  render(req, res, 'index');
+  utils.render(req, res, 'index');
 };
 
 exports.signup = function(req, res){
-  render(req, res, 'signup');
+  utils.render(req, res, 'signup');
 };
 
 exports.login = function(req, res){
-  render(req, res, 'login');
+  utils.render(req, res, 'login');
 };
 
 exports.topic = {
   create: function(req, res) {
     db.nodes.find({}, function(err, cursor) {
-      if(!err) {
-        cursor.toArray(function(err, result) {
-          render(req, res, 'createTopic', {nodes: result});
-        });
-      }
+      cursor.toArray(function(err, result) {
+        utils.render(req, res, 'createTopic', {nodes: result});
+      });
+    });
+  }
+};
+
+exports.node = {
+  index: function(req, res) {
+    db.nodes.find({}, function(err, cursor) {
+      cursor.toArray(function(err, result) {
+        utils.render(req, res, 'nodeIndex', {nodes: result});
+      });
     });
   }
 };

@@ -28,17 +28,20 @@ if ('development' == app.get('env')) {
 (function() {
   var view = require('./handlers/view');
   var account = require('./handlers/account');
+  var topic = require('./handlers/topic');
 
   require("./db");
 
   app.get('/', view.index);
   app.get('/account/signup/', view.signup);
-  app.post('/account/signup/', account.signup);
   app.get('/account/login/', view.login);
-  app.post('/account/login/', account.login);
   app.get('/account/logout/', account.logout);
-
   app.get('/topic/create/', view.topic.create);
+  app.get('/node/', view.node.index);
+
+  app.post('/account/signup/', account.signup);
+  app.post('/account/login/', account.login);
+  app.post('/topic/create/', topic.create);
 })();
 
 http.createServer(app).listen(app.get('port'), function(){

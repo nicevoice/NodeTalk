@@ -1,10 +1,10 @@
 {
-  "username": "",
-  "passwd": "",
-  "email": "",
-  "created_at": "",
+  "username": "L1String",
+  "passwd": "SHA256",
+  "email": "email",
+  "created_at": "Unix timestamp",
   "tokens": {
-    "token": "",
-    "created_at": ""
+    "token": "SHA256",
+    "created_at": "Unix timestamp"
   }
 }

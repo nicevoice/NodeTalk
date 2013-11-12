@@ -13,4 +13,14 @@ exports.createToken = function(account, callback) {
 
     callback(token);
   });
-}
+};
+
+exports.authenticate = function(req, callback) {
+  if(!req.cookies.token) {
+    return callback(true, {});
+  }
+
+  db.accounts.findOne({'tokens.token': req.cookies.token}, function(err, result) {
+    callback((err || !result), result);
+  });
+};

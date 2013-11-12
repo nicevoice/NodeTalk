@@ -18,6 +18,7 @@
     "jade": "*",
     "less": "*",
     "i18next": "*",
-    "mongodb": "*"
+    "mongodb": "*",
+    "markdown": "*"
   }
 }

@@ -1,0 +1,10 @@
+{
+  "title": "String",
+  "content": "Markdown",
+  "content_html": "HTML",
+  "author": "ObjectID",
+  "node": "ObjectID",
+  "created_at": "Unix timestamp",
+  "modified_at": "Unix timestamp",
+  "reply_at": "Unix timestamp"
+}
