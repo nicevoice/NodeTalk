@@ -17,7 +17,7 @@ Then you can visit `http://127.0.0.1:3000`, or setup a proxy on 80:
 
     server {
         listen 80;
-        server_name nodetalk.jysperm.me;
+        server_name nt.jybox.net;
 
         location / {
             proxy_set_header Host $host";
