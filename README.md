@@ -22,7 +22,7 @@ Then you can visit `http://127.0.0.1:3000`, or setup a proxy on 80:
         server_name nt.jybox.net;
 
         location / {
-            proxy_set_header Host $host";
+            proxy_set_header Host $host;
             proxy_redirect off;
             proxy_pass http://127.0.0.1:3000;
         }
