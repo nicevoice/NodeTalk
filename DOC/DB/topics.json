@@ -6,5 +6,6 @@
   "node": "ObjectID",
   "created_at": "Unix timestamp",
   "modified_at": "Unix timestamp",
+  "replys": "int",
   "reply_at": "Unix timestamp"
 }

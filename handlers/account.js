@@ -36,6 +36,7 @@ exports.signup = function(req, res) {
         'username': username,
         'passwd': passwd,
         'email': req.body['email'],
+        'avatar': 'http://www.gravatar.com/avatar/' + utils.md5(req.body['email']),
         'created_at': utils.timestamp()
       }, function() {
         db.accounts.findOne({'username': username}, function(err, result) {

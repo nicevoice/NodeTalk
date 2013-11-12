@@ -3,6 +3,7 @@
   "passwd": "SHA256",
   "email": "email",
   "created_at": "Unix timestamp",
+  "avatar": "URL",
   "tokens": {
     "token": "SHA256",
     "created_at": "Unix timestamp"

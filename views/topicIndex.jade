@@ -1,0 +1,18 @@
+extends layout
+
+prepend head
+  title #{t("word.topic")} | #{t('app.name')}
+
+block main
+  header= t('word.topic')
+  ul.list-group
+    for topic in topics
+      li.list-group-item
+        a(href='/member/#{topic.author.username}/')
+          img(src='#{topic.author.avatar}?s=58')
+        .list-content
+          p
+            a(href='/topic/#{topic._id}/')= topic.title
+            span.badge.pull-right= topic.replys
+          p.
+            作者 #{topic.author.username}

@@ -5,6 +5,10 @@ exports.sha256 = function(data) {
   return crypto.createHash('sha256').update(data).digest('hex');
 };
 
+exports.md5 = function(data) {
+  return crypto.createHash('md5').update(data).digest('hex');
+};
+
 exports.timestamp = function() {
  return Math.round(Date.now() / 1000);
 };

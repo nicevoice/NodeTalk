@@ -1,8 +1,20 @@
+var async = require("async");
 var db = require("../db");
 var utils = require('../utils');
 
-exports.index = function(req, res) {
-  utils.render(req, res, 'index');
+exports.topicIndex = function(req, res) {
+  db.topics.find({}, function(err, cursor) {
+    cursor.toArray(function(err, result) {
+      async.map(result, function(topic, callback) {
+        db.accounts.findOne({_id: topic.author}, function(err, account) {
+          topic.author = account;
+          callback(null, topic);
+        });
+      }, function(err, result) {
+        utils.render(req, res, 'topicIndex', {topics: result});
+      });
+    });
+  });
 };
 
 exports.signup = function(req, res){

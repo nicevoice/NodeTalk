@@ -19,6 +19,8 @@
     "less": "*",
     "i18next": "*",
     "mongodb": "*",
-    "markdown": "*"
+    "markdown": "*",
+    "async": "*",
+    "vows": "*"
   }
 }
