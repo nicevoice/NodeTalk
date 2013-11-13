@@ -5,7 +5,7 @@ var markdown = require("markdown").markdown;
 
 exports.create = function(req, res) {
   function error(msg) {
-    db.nodes.find({}, function(err, cursor) {
+    db.nodes.find().sort({'reply_at': -1}, function(err, cursor) {
       cursor.toArray(function(err, result) {
         utils.render(req, res, 'createTopic', {
           'errorMsg': req.t(msg),
@@ -47,6 +47,7 @@ exports.create = function(req, res) {
           'content_html': markdown.toHTML(req.body['content']),
           'author': account._id,
           'node': result._id,
+          'replys': 0,
           'created_at': utils.timestamp(),
           'modified_at': utils.timestamp(),
           'reply_at': utils.timestamp()

@@ -3,7 +3,7 @@ var db = require("../db");
 var utils = require('../utils');
 
 exports.topicIndex = function(req, res) {
-  db.topics.find({}, function(err, cursor) {
+  db.topics.find().sort({'reply_at': -1}, function(err, cursor) {
     cursor.toArray(function(err, result) {
       async.map(result, function(topic, callback) {
         db.accounts.findOne({_id: topic.author}, function(err, account) {
