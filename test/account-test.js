@@ -2,8 +2,8 @@ var request = require('request');
 var vows = require('vows');
 var assert = require('assert');
 
-vows.describe('/account/').addBatch({
-  "/account/singup/": {
+vows.describe('Account').addBatch({
+  'GET /account/singup/': {
     'topic': function () {
       request({
         uri: 'http://127.0.0.1:3000/account/signup/',
