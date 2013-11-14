@@ -2,6 +2,11 @@ var request = require('request');
 var vows = require('vows');
 var assert = require('assert');
 
+var assertSuccess = function(err, res, body) {
+  assert.equal(err, null);
+  assert.equal(res.statusCode, 200);
+}
+
 vows.describe('Account').addBatch({
   'GET /account/singup/': {
     'topic': function () {
@@ -10,8 +15,6 @@ vows.describe('Account').addBatch({
         method: 'GET'
       }, this.callback)
     },
-    "should respond with 200": function (err, res, body) {
-      assert.equal(res.statusCode, 200);
-    }
+    'assert Success': assertSuccess
   }
 }).export(module);
