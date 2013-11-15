@@ -34,6 +34,7 @@ if ('development' == app.get('env')) {
 
   app.get('/', view.topicIndex);
   app.get('/topic/', view.topicIndex);
+  app.get('/topic/:id/', view.topic.view);
   app.get('/account/signup/', view.signup);
   app.get('/account/login/', view.login);
   app.get('/account/logout/', account.logout);

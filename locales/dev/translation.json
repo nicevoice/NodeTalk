@@ -14,7 +14,8 @@
     "passwd": "密码",
     "error": "错误",
     "logout": "注销",
-    "createTopic": "创建话题"
+    "createTopic": "创建话题",
+    "replu": "回复"
   },
   "view": {
     "signup": {

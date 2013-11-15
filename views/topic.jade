@@ -1,0 +1,12 @@
+extends layout
+
+prepend head
+  title #{topic.title} | #{t('app.name')}
+
+block main
+  .row
+    header= topic.title
+    | !{topic.html}
+
+  .row
+    header= t('word.reply')

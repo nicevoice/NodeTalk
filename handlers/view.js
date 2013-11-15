@@ -32,6 +32,13 @@ exports.topic = {
         utils.render(req, res, 'createTopic', {nodes: result});
       });
     });
+  },
+  view: function(req, res) {
+    db.topics.findOne({_id: req.params.id}, function(err, result) {
+      console.log({_id: req.params.id});
+      console.log(result);
+      utils.render(req, res, 'topic', {topic: result});
+    });
   }
 };
 
