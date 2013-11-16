@@ -33,12 +33,12 @@ if ('development' == app.get('env')) {
   require("./db");
 
   app.get('/', view.topicIndex);
+  app.get('/topic/create/', view.topic.create);
   app.get('/topic/', view.topicIndex);
   app.get('/topic/:id/', view.topic.view);
   app.get('/account/signup/', view.signup);
   app.get('/account/login/', view.login);
   app.get('/account/logout/', account.logout);
-  app.get('/topic/create/', view.topic.create);
   app.get('/node/', view.node.index);
 
   app.post('/account/signup/', account.signup);

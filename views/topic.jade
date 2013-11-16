@@ -6,7 +6,7 @@ prepend head
 block main
   .row
     header= topic.title
-    | !{topic.html}
+    p!= topic.content_html
 
   .row
     header= t('word.reply')

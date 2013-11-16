@@ -1,4 +1,5 @@
 var async = require("async");
+var BSON = require('mongodb').BSONPure;
 var db = require("../db");
 var utils = require('../utils');
 
@@ -34,9 +35,7 @@ exports.topic = {
     });
   },
   view: function(req, res) {
-    db.topics.findOne({_id: req.params.id}, function(err, result) {
-      console.log({_id: req.params.id});
-      console.log(result);
+    db.topics.findOne({_id: BSON.ObjectID(req.params.id)}, function(err, result) {
       utils.render(req, res, 'topic', {topic: result});
     });
   }
