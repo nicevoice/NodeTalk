@@ -62,4 +62,4 @@ vows.describe('View').addBatch({
     },
     'assert Success': assertSuccess
   }
-}).run();
+}).exportTo(module);
