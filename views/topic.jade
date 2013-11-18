@@ -2,6 +2,23 @@ extends layout
 
 prepend head
   title #{topic.title} | #{t('app.name')}
+  :less
+    .list-group-item {
+      margin: 0 0 10px 0;
+      padding: 0 0 10px 0;
+      border: none;
+      border-bottom: 1px solid #ddd;
+
+      >a {
+        float: left;
+        margin-left: 5px;
+        margin-right: 8px;
+      }
+
+      .list-content {
+        margin-left: 61px;
+      }
+    }
 
 block main
   .row
@@ -10,6 +27,13 @@ block main
 
   .row
     header= t('word.reply')
+    ul.list-group
+      for reply in topic.reply
+        li.list-group-item
+          a(href='/member/#{reply.author.username}/')
+            img(src='#{reply.author.avatar}?s=58')
+          .list-content
+            p= reply.content_html
 
   .row
     header= t('word.createReply')

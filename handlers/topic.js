@@ -30,8 +30,20 @@ module.exports = {
   },
 
   view: function(req, res) {
-    db.topics.findOne({_id: BSON.ObjectID(req.params.id)}, function(err, result) {
-      utils.render(req, res, 'topic', {topic: result});
+    db.topics.findOne({_id: BSON.ObjectID(req.params.id)}, function(err, topic) {
+      if(topic.reply) {
+        async.map(topic.reply, function(reply, callback) {
+          db.accounts.findOne({_id: reply.author}, function(err, account) {
+            reply.author = account;
+            callback(null, reply);
+          });
+        }, function(err, result) {
+          topic.reply = result;
+          utils.render(req, res, 'topic', {topic: topic});
+        });
+      } else {
+        utils.render(req, res, 'topic', {topic: topic});
+      }
     });
   },
 
@@ -67,32 +79,75 @@ module.exports = {
       };
 
       db.topics.findOne(data, function(err, result) {
-        if(!err && result)
-          res.redirect('/topic/' + result._id + '/');
-      });
-
-      db.nodes.findOne({name: req.body['node']}, function(err, result) {
         if(!err && result) {
-          db.topics.insert({
-            'title': req.body['title'],
-            'content': req.body['content'],
-            'content_html': markdown.toHTML(req.body['content']),
-            'author': account._id,
-            'node': result._id,
-            'replys': 0,
-            'created_at': utils.timestamp(),
-            'modified_at': utils.timestamp(),
-            'reply_at': utils.timestamp()
-          }, function() {
-            db.topics.findOne(data, function(err, result) {
-              res.redirect('/topic/' + result._id + '/');
-            });
-          });
+          res.redirect('/topic/' + result._id + '/');
+          res.send();
         }
         else {
-          error('handler.createTopic.invalidNode');
+          db.nodes.findOne({name: req.body['node']}, function(err, result) {
+            if(!err && result) {
+              db.topics.insert({
+                'title': req.body['title'],
+                'content': req.body['content'],
+                'content_html': markdown.toHTML(req.body['content']),
+                'author': account._id,
+                'node': result._id,
+                'replys': 0,
+                'created_at': utils.timestamp(),
+                'modified_at': utils.timestamp(),
+                'reply_at': utils.timestamp(),
+                'reply': []
+              }, function() {
+                db.topics.findOne(data, function(err, result) {
+                  res.redirect('/topic/' + result._id + '/');
+                });
+              });
+            }
+            else {
+              error('handler.createTopic.invalidNode');
+            }
+          });
         }
       });
+    });
+  },
+
+  doReply: function(req, res) {
+    var error = function(msg) {
+      db.topics.findOne({_id: BSON.ObjectID(req.params.id)}, function(err, result) {
+        utils.render(req, res, 'topic', {
+          topic: result,
+          content: req.body['content'],
+          'errorMsg': req.t(msg),
+        });
+      });
+    };
+
+    db.topics.findOne({_id: BSON.ObjectID(req.params.id)}, function(err, topic) {
+      if(!err && !topic) {
+        utils.render(req, res, 'topicIndex', {
+          'errorMsg': req.t('handler.topic.invalidTopic')
+        });
+      }
+      else {
+        db.topics.update({_id: topic._id}, {
+          $inc: {'replys': 1},
+          $push: {'reply': {
+            'author': topic.author,
+            'content': req.body['content'],
+            'content_html': markdown.toHTML(req.body['content']),
+            'created_at': utils.timestamp()
+          }}
+        }, function(err) {
+          db.topics.update({_id: topic._id}, {'reply_at': utils.timestamp()}, function(err) {
+            db.topics.findOne({_id: topic._id}, function(err, topic) {
+              utils.render(req, res, 'topic', {
+                topic: topic
+              });
+            });
+          });
+        });
+      }
     });
   }
 };
