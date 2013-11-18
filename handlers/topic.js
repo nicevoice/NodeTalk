@@ -31,19 +31,17 @@ module.exports = {
 
   view: function(req, res) {
     db.topics.findOne({_id: BSON.ObjectID(req.params.id)}, function(err, topic) {
-      if(topic.reply) {
-        async.map(topic.reply, function(reply, callback) {
-          db.accounts.findOne({_id: reply.author}, function(err, account) {
-            reply.author = account;
-            callback(null, reply);
-          });
-        }, function(err, result) {
-          topic.reply = result;
-          utils.render(req, res, 'topic', {topic: topic});
+      if(!topic.reply)
+        topic.reply = [];
+      async.map(topic.reply, function(reply, callback) {
+        db.accounts.findOne({_id: reply.author}, function(err, account) {
+          reply.author = account;
+          callback(null, reply);
         });
-      } else {
+      }, function(err, result) {
+        topic.reply = result;
         utils.render(req, res, 'topic', {topic: topic});
-      }
+      });
     });
   },
 
