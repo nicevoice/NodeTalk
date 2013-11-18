@@ -7,5 +7,11 @@
   "created_at": "Unix timestamp",
   "modified_at": "Unix timestamp",
   "replys": "int",
-  "reply_at": "Unix timestamp"
+  "reply_at": "Unix timestamp",
+  "reply": [{
+    "author": "ObjectID",
+    "content": "Markdown",
+    "content_html": "HTML",
+    "created_at": "Unix timestamp"
+  }]
 }
