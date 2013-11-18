@@ -7,6 +7,14 @@ MongoClient.connect(config.dbname, {}, function(err, db) {
     process.exit(1);
   }
 
+  /*
+  module.exports = {
+    accounts: db.collection('accounts'),
+    nodes: db.collection('nodes'),
+    topics: db.collection('topics')
+  };
+  */
+
   exports.accounts = db.collection('accounts');
   exports.nodes = db.collection('nodes');
   exports.topics = db.collection('topics');
