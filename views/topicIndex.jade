@@ -2,6 +2,23 @@ extends layout
 
 prepend head
   title #{t("word.topic")} | #{t('app.name')}
+  :less
+    .list-group-item {
+      margin: 0 0 10px 0;
+      padding: 0 0 10px 0;
+      border: none;
+      border-bottom: 1px solid #ddd;
+
+      >a {
+        float: left;
+        margin-left: 5px;
+        margin-right: 8px;
+      }
+
+      .list-content {
+        margin-left: 61px;
+      }
+    }
 
 block main
   header= t('word.topic')
