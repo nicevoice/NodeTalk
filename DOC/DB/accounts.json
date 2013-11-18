@@ -4,8 +4,8 @@
   "email": "email",
   "created_at": "Unix timestamp",
   "avatar": "URL",
-  "tokens": {
+  "tokens": [{
     "token": "SHA256",
     "created_at": "Unix timestamp"
-  }
+  }]
 }
