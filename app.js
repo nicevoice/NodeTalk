@@ -41,9 +41,10 @@ if ('development' == app.get('env')) {
   app.post('/account/login/', account.doLogin);
 
   app.get('/topic/create/', topic.create);
+  app.post('/topic/create/', topic.doCreate);
   app.get('/topic/', topic.index);
   app.get('/topic/:id/', topic.view);
-  app.post('/topic/create/', topic.doCreate);
+  app.post('/topic/:id/', topic.doReply);
 
   app.get('/node/', node.index);
 })();
