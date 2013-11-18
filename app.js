@@ -26,24 +26,26 @@ if ('development' == app.get('env')) {
 }
 
 (function() {
-  var view = require('./handlers/view');
+  var node = require('./handlers/node');
   var account = require('./handlers/account');
   var topic = require('./handlers/topic');
 
   require("./db");
 
-  app.get('/', view.topicIndex);
-  app.get('/topic/create/', view.topic.create);
-  app.get('/topic/', view.topicIndex);
-  app.get('/topic/:id/', view.topic.view);
-  app.get('/account/signup/', view.signup);
-  app.get('/account/login/', view.login);
-  app.get('/account/logout/', account.logout);
-  app.get('/node/', view.node.index);
+  app.get('/', topic.index);
 
-  app.post('/account/signup/', account.signup);
-  app.post('/account/login/', account.login);
-  app.post('/topic/create/', topic.create);
+  app.get('/account/signup/', account.signup);
+  app.get('/account/login/', account.login);
+  app.get('/account/logout/', account.logout);
+  app.post('/account/signup/', account.doSignup);
+  app.post('/account/login/', account.doLogin);
+
+  app.get('/topic/create/', topic.create);
+  app.get('/topic/', topic.index);
+  app.get('/topic/:id/', topic.view);
+  app.post('/topic/create/', topic.doCreate);
+
+  app.get('/node/', node.index);
 })();
 
 http.createServer(app).listen(app.get('port'), function(){
