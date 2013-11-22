@@ -111,16 +111,6 @@ module.exports = {
   },
 
   doReply: function(req, res) {
-    var error = function(msg) {
-      db.topics.findOne({_id: BSON.ObjectID(req.params.id)}, function(err, result) {
-        utils.render(req, res, 'topic', {
-          topic: result,
-          content: req.body['content'],
-          'errorMsg': req.t(msg),
-        });
-      });
-    };
-
     db.topics.findOne({_id: BSON.ObjectID(req.params.id)}, function(err, topic) {
       if(!err && !topic) {
         utils.render(req, res, 'topicIndex', {
@@ -130,6 +120,7 @@ module.exports = {
       else {
         db.topics.update({_id: topic._id}, {
           $inc: {'replys': 1},
+          $set: {'reply_at': utils.timestamp()},
           $push: {'reply': {
             'author': topic.author,
             'content': req.body['content'],
@@ -137,13 +128,7 @@ module.exports = {
             'created_at': utils.timestamp()
           }}
         }, function(err) {
-          db.topics.update({_id: topic._id}, {'reply_at': utils.timestamp()}, function(err) {
-            db.topics.findOne({_id: topic._id}, function(err, topic) {
-              utils.render(req, res, 'topic', {
-                topic: topic
-              });
-            });
-          });
+          module.exports.view(req, res);
         });
       }
     });

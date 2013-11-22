@@ -33,7 +33,7 @@ block main
           a(href='/member/#{reply.author.username}/')
             img(src='#{reply.author.avatar}?s=58')
           .list-content
-            p= reply.content_html
+            p!= reply.content_html
 
   .row
     header= t('word.createReply')
