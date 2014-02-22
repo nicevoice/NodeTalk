@@ -20,6 +20,16 @@ module.exports = {
             param.account = err ? undefined : account;
             res.render(name, param);
         });
+    },
+
+    ifAdmin: function(account) {
+        var db = require('./db');
+        db.accounts.findOne({"username": account}, function(err, result) {
+            if (err || !result) {
+                return false;
+            } else {
+                return result.role <= 1;
+            }
+        });
     }
 };
-

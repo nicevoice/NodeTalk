@@ -46,7 +46,8 @@ module.exports = {
           'passwd': passwd,
           'email': req.body['email'],
           'avatar': 'http://www.gravatar.com/avatar/' + utils.md5(req.body['email']),
-          'created_at': utils.timestamp()
+          'created_at': utils.timestamp(),
+          'role': 10
         }, function() {
           db.accounts.findOne({'username': username}, function(err, result) {
             auth.createToken(result, function(token) {
