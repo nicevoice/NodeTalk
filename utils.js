@@ -1,5 +1,4 @@
 var crypto = require('crypto');
-var auth = require('./auth');
 
 module.exports = {
     sha256: function(data) {
@@ -15,7 +14,7 @@ module.exports = {
     },
 
     render: function(req, res, name, param) {
-        auth.authenticate(req, function(err, account) {
+        require('./auth').authenticate(req, function(err, account) {
             if(!param)
                 param = {};
             param.account = err ? undefined : account;
