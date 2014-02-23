@@ -20,7 +20,6 @@
     }
   ],
   "scripts": {
-    "test": "vows test/*-test.js",
     "start": "node app.js"
   },
   "license": "MIT",
@@ -32,9 +31,6 @@
     "mongodb": "*",
     "markdown": "*",
     "async": "*",
-    "vows": "*",
-    "forever": "*",
-    "api-easy": "*",
-    "request": "*"
+    "forever": "*"
   }
 }
