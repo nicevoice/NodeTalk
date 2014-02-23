@@ -2,12 +2,14 @@ var express = require('express');
 var path = require('path');
 var i18next = require('i18next');
 
+var config = require('./config');
+
 var app = express();
 
 i18next.init();
 i18next.registerAppHelper(app);
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || config.port);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.favicon());

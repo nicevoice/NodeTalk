@@ -1,3 +1,5 @@
 module.exports = {
-  dbname: "mongodb://localhost:27017/nodetalk"
+  port: 3000,
+
+  mongodb: "mongodb://localhost:27017/nodetalk"
 }

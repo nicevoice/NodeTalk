@@ -1,7 +1,7 @@
 var config = require('./config');
 
 var MongoClient = require('mongodb').MongoClient;
-MongoClient.connect(config.dbname, {}, function(err, db) {
+MongoClient.connect(config.mongodb, {}, function(err, db) {
   if (err) {
     console.log('Cannot connect to MongoDB:');
     console.log(err);
