@@ -4,10 +4,20 @@
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jybox/NodeTalk"
+    "url": "https://github.com/jysperm/NodeTalk.git"
   },
+  "bugs": "https://github.com/jysperm/NodeTalk/issues/",
   "contributors": [
-    {"name": "jysperm", "web": "http://jysperm.me/"}
+    {
+      "name": "jysperm",
+      "email": "jysperm@gmail.com",
+      "web": "http://jysperm.me/"
+    },
+    {
+      "name": "oyiadin",
+      "email": "oyiadin@gmail.com",
+      "web": "http://oyiadin.farbox.com/"
+    }
   ],
   "scripts": {
     "test": "vows test/*-test.js",

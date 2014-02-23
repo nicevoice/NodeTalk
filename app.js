@@ -1,5 +1,4 @@
 var express = require('express');
-var http = require('http');
 var path = require('path');
 var i18next = require('i18next');
 
@@ -25,32 +24,11 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-(function() {
-  var node = require('./handlers/node');
-  var account = require('./handlers/account');
-  var topic = require('./handlers/topic');
+if (!module.parent) {
+  require("./db");  // 初始化，连入数据库
 
-  require("./db");
+  require('./routers').setRouters(app);
 
-  app.get('/', topic.index);
-
-  app.get('/account/signup/', account.signup);
-  app.get('/account/login/', account.login);
-  app.get('/account/logout/', account.logout);
-  app.post('/account/signup/', account.doSignup);
-  app.post('/account/login/', account.doLogin);
-
-  app.get('/topic/create/', topic.create);
-  app.post('/topic/create/', topic.doCreate);
-  app.get('/topic/', topic.index);
-  app.get('/topic/:id/', topic.view);
-  app.post('/topic/:id/', topic.doReply);
-
-  app.get('/node/', node.index);
-})();
-
-http.createServer(app).listen(app.get('port'), function(){
+  app.listen(app.get('port'));
   console.log('Express server listening on port ' + app.get('port'));
-});
-
-
+}
