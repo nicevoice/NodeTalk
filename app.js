@@ -1,13 +1,17 @@
 var express = require('express');
-var path = require('path');
 var i18next = require('i18next');
+var path = require('path');
 
 var config = require('./config');
 var db = require('./db');
 
 var app = express();
 
-i18next.init();
+i18next.init({
+  fallbackLng: config.i18n.defaultLanguage,
+  resGetPath: path.join(__dirname, 'locales/__lng__.json')
+});
+
 i18next.registerAppHelper(app);
 
 app.set('port', process.env.PORT || config.port);
