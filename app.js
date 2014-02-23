@@ -25,7 +25,7 @@ if ('development' == app.get('env')) {
 }
 
 if (!module.parent) {
-  require("./db");  // 初始化，连入数据库
+  require("./db");
 
   require('./routers').setRouters(app);
 
