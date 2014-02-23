@@ -3,6 +3,7 @@ var path = require('path');
 var i18next = require('i18next');
 
 var config = require('./config');
+var db = require('./db');
 
 var app = express();
 
@@ -27,10 +28,10 @@ if ('development' == app.get('env')) {
 }
 
 if (!module.parent) {
-  require("./db");
+  db.connect(function() {
+    require('./routers').setRouters(app);
 
-  require('./routers').setRouters(app);
-
-  app.listen(app.get('port'));
-  console.log('Express server listening on port ' + app.get('port'));
+    app.listen(app.get('port'));
+    console.log('Express server listening on port ' + app.get('port'));
+  });
 }
