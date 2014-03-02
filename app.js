@@ -31,7 +31,17 @@ app.use(express.errorHandler());
 
 if (!module.parent) {
   db.connect(function() {
-    require('./routers').setRouters(app);
+    ['account', 'node', 'topic'].forEach(function(handlerModuleName) {
+      var handlerModule = require('./handlers/' + handlerModuleName);
+
+      Object.keys(handlerModule).forEach(function(method) {
+        Object.keys(handlerModule[method]).forEach(function(handlerName) {
+          app[method]('/' + handlerModuleName + '/' + handlerName, handlerModule[method][handlerName]);
+        });
+      });
+    });
+
+    app.get('/', require('./handlers/topic').get['']);
 
     app.listen(config.port);
     console.log('NodeTalk listening on port ' + config.port);
