@@ -10,5 +10,8 @@ exports.connect = function(callback) {
     ['accounts', 'nodes', 'topics'].forEach(function(item) {
       exports[item] = db.collection(item);
     });
+
+    if(callback)
+      callback();
   });
 };
