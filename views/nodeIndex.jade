@@ -3,6 +3,12 @@ extends layout
 prepend head
   title #{t("word.node")} | #{t('app.name')}
 
+prepend sidebar
+  .row
+    header= t('word.createNode')
+    p
+      a(href='/node/create')= t('word.createNode')
+
 block main
   header= t('word.node')
   ul.list-group

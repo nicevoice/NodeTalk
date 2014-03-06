@@ -1,0 +1,23 @@
+extends layout
+
+prepend head
+  title #{t("word.createNode")} | #{t('app.name')}
+
+block main
+  header= t('word.createNode')
+  form.form-horizontal(method='post', role='form')
+    .form-group
+      label.col-sm-2.col-md-offset-1.control-label(for='nodename')= t('word.nodeName')
+      .col-sm-5
+        input#nodename.form-control(type='text', name='nodename', required, placeholder=t('word.nodeName'))
+    .form-group
+      label.col-sm-2.col-md-offset-1.control-label(for='nodetitle')= t('word.nodeTitle')
+      .col-sm-5
+        input#nodetitle.form-control(type='text', name='nodetitle', placeholder=t('word.nodeTitle'))
+    .form-group
+      label.col-sm-2.col-md-offset-1.control-label(for='nodedescription')= t('word.nodeDescription')
+      .col-sm-5
+        input#nodeDescription.form-control(type='text', name='nodedescrption', placeholder=t('word.nodeDescription'))
+    .form-group
+      .col-sm-offset-3
+        button.btn.btn-lg.btn-primary(type='submit')= t('word.createNode')
