@@ -24,7 +24,7 @@ module.exports = {
     create: function(req, res) {
       db.nodes.find({}, function(err, cursor) {
         cursor.toArray(function(err, result) {
-          utils.render(req, res, 'createTopic', {nodes: result});
+          utils.render(req, res, 'topicCreate', {nodes: result});
         });
       });
     },
@@ -51,7 +51,7 @@ module.exports = {
       var error = function(msg) {
         db.nodes.find().sort({'reply_at': -1}, function(err, cursor) {
           cursor.toArray(function(err, result) {
-            utils.render(req, res, 'createTopic', {
+            utils.render(req, res, 'topicCreate', {
               'errorMsg': req.t(msg),
               'nodevalue': req.body['node'],
               'title': req.body['title'],

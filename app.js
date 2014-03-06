@@ -36,7 +36,8 @@ if (!module.parent) {
 
       Object.keys(handlerModule).forEach(function(method) {
         Object.keys(handlerModule[method]).forEach(function(handlerName) {
-          app[method]('/' + handlerModuleName + '/' + handlerName, handlerModule[method][handlerName]);
+          app[method]('/' + handlerModuleName + '/' + handlerName,
+            handlerModule[method][handlerName]);
         });
       });
     });
