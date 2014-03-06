@@ -28,7 +28,6 @@ module.exports = {
 
       db.nodes.find({name: req.body['nodename']}, function(err, cursor) {
         cursor.toArray(function(err, result) {
-          console.log(result);
           if (!result.length == 0) {
             utils.render(
               req, res, 'nodeCreate', {errorMsg: req.t('handler.nodeExisted')});
