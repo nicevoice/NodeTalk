@@ -1,24 +1,21 @@
 var crypto = require('crypto');
 var db = require('./db');
 
-sha256 = function(data) {
+exports.sha256 = function(data) {
   return crypto.createHash('sha256').update(data).digest('hex');
 };
-exports.sha256 = sha256;
 
-md5 = function(data) {
+exports.md5 = function(data) {
   return crypto.createHash('md5').update(data).digest('hex');
 };
-exports.md5 = md5;
 
-timestamp = function() {
+exports.timestamp = function() {
   return Math.round(Date.now() / 1000);
 };
-exports.timestamp = timestamp;
 
-authenticate = function(req, callback) {
+exports.authenticate = function(req, callback) {
   if (!req.cookies.token) {
-    return callback(true, {});
+    callback(true, {});
   }
 
   db.accounts.findOne({'tokens.token': req.cookies.token},
@@ -26,10 +23,9 @@ authenticate = function(req, callback) {
       callback((err || !result), result);
   });
 };
-exports.authenticate = authenticate;
 
-createToken = function(account, callback) {
-  var token = sha256(crypto.randomBytes(256));
+exports.createToken = function(account, callback) {
+  var token = exports.sha256(crypto.randomBytes(256));
   db.accounts.findOne({'tokens.token': token}, function() {
     db.accounts.update({_id: account._id}, {
       $push: {tokens:{
@@ -41,11 +37,10 @@ createToken = function(account, callback) {
     callback(token);
   });
 };
-exports.createToken = createToken;
 
-isAdmin = function(req, account) {
+exports.isAdmin = function(req, account) {
   if (!account) {
-    authenticate(req, function(err, account) {
+    exports.authenticate(req, function(err, account) {
       if (!err && account) {
         this.account = account;
       } else {
@@ -61,15 +56,13 @@ isAdmin = function(req, account) {
     }
   });
 };
-exports.isAdmin = isAdmin;
 
-render = function(req, res, name, param) {
-  authenticate(req, function(err, account) {
+exports.render = function(req, res, name, param) {
+  exports.authenticate(req, function(err, account) {
     if (!param)
       param = {};
     param.account = err ? undefined : account;
-    param.isAdmin = err ? false : isAdmin(req, account)
+    param.isAdmin = err ? false : exports.isAdmin(req, account)
     res.render(name, param);
   });
 };
-exports.render = render;
