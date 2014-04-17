@@ -31,6 +31,6 @@
     "mongodb": "*",
     "markdown": "*",
     "async": "*",
-    "forever": "*"
+    "pm2": "*"
   }
 }

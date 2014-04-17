@@ -7,6 +7,5 @@
   "tokens": [{
     "token": "SHA256",
     "created_at": "Unix timestamp"
-  }],
-  "role": "int"
+  }]
 }

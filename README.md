@@ -9,11 +9,12 @@ A Node-based BBS by NodeJS, use MongoDB and Markdown.
 
     git clone https://github.com/jybox/NodeTalk.git
     cd NodeTalk
+
     npm install
+    npm install pm2 -g
+    make
 
-    ./node_modules/.bin/lessc -x static/style/layout.less > static/style/layout.css
-
-    ./node_modules/.bin/forever start app.js
+    pm2 start --name NodeTalk app.js
 
 Then you can visit `http://127.0.0.1:3000`, or setup a proxy on 80:
 

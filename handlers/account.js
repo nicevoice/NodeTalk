@@ -62,8 +62,7 @@ module.exports = {
             'passwd': passwd,
             'email': req.body['email'],
             'avatar': avatar_prefix + utils.md5(req.body['email']),
-            'created_at': utils.timestamp(),
-            'role': 10
+            'created_at': utils.timestamp()
           }, function() {
             db.accounts.findOne({'username': username}, function(err, result) {
               utils.createToken(result, function(token) {
