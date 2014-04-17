@@ -9,9 +9,9 @@ A Node-based BBS by NodeJS, use MongoDB and Markdown.
 
     git clone https://github.com/jybox/NodeTalk.git
     cd NodeTalk
-    npm install
 
-    ./node_modules/.bin/lessc -x static/style/layout.less > static/style/layout.css
+    npm install
+    make
 
     ./node_modules/.bin/forever start app.js
 
